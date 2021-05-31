@@ -1,0 +1,142 @@
+<br>
+<div nz-row>
+    <h3>Check in</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <div style="padding:30px;">
+            <nz-card [nzBordered]="false" nzTitle="Thông tin khách hàng">
+                <div nz-row>
+                    <div nz-col class="gutter-row" [nzSpan]="24">
+                        <div class="inner-box">
+                            Check in:
+                            <nz-select style="width: 100%;" [(ngModel)]="binding3" nzShowSearch #customerSelect
+                                (ngModelChange)="getCustomerById(customerSelect.value)"
+                                (ngModelChange)="getProductInBillByCustomerId(customerSelect.value)">
+                                <nz-option *ngFor="let item of customerFullList"
+                                    [nzLabel]="item.phoneNumber + '  ||  ' + item.name" [nzValue]="item.id"
+                                    [nzValue]="item.id">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br>
+                <div>
+                    <nz-table nzTemplateMode #customerTable [nzData]="customerList">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên</th>
+                                <th>Sđt</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of customerTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.phoneNumber}}</td>
+                                <td>
+                                    <button nz-button nzType="primary" >Chi tiết</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div style="padding:30px;">
+            <nz-card [nzBordered]="false" nzTitle="Thông tin thẻ">
+                <div>
+                    <nz-table nzTemplateMode #productInBillTable [nzData]="productInBillListFilter">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Bộ môn</th>
+                                <th>Dịch vụ</th>
+                                <th>Thời hạn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of productInBillTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.serviceName}}</td>
+                                <td>Từ {{item.fromDate | date: 'dd-MM-YYYY'}} đến {{item.toDate | date: 'dd-MM-YYYY'}}</td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div style="padding:30px;">
+            <nz-card [nzBordered]="false" nzTitle="Danh sách lớp">
+                <div>
+                    <nz-table nzTemplateMode #timetableTable [nzData]="timeTableList">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Lớp</th>
+                                <th>Giáo viên</th>
+                                <th>Thời gian</th>
+                                <th>Ca</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of timetableTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.className}} <br><hr> {{item.lesson}}</td>
+                                <td>{{item.employeeName}}</td>
+                                <td>{{item.sessionName}}</td>
+                                <td>{{item.date | date: 'dd-MM-YYYY'}}</td>
+                                <td>
+                                    <button nz-button nzType="primary" (click)="insertCustomerIntoClass(customerSelect.value,item.id)">Check in</button> <br><br>
+                                    <button nz-button nzType="primary" (click)="showModal(item.id)">Chi tiết</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Danh sách học viên (Sĩ số: {{totalStudent}})" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+        <nz-table nzTemplateMode #table [nzData]="cusInClassList">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Học viên</th>
+                    <th>Sđt</th>
+                    <th>Trạng thái</th>
+                    <th>Ca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of table.data">
+                    <td>{{data.id}}</td>
+                    <td>{{data.customerName}}</td>
+                    <td>{{data.customerPhoneNumber}}</td>
+                    <td *ngIf="data.active == true">Đã check in</td>
+                    <td *ngIf="data.active == false">Chưa check in</td>
+                    <td>{{data.sessionName}}</td>
+                </tr>
+
+            </tbody>
+        </nz-table>
+    </ng-container>
+  </nz-modal>

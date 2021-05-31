@@ -1,0 +1,193 @@
+<form nz-form [formGroup]="createOrUpdateForm">
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Tên</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <input nz-input formControlName="name" [(ngModel)]="employeeBinding.name" />
+            </ng-template>
+            <ng-template #elseBlock>
+                <input nz-input formControlName="name" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>                
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Ngày sinh</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock1 else elseBlock1"></div>
+            <ng-template #thenBlock1>
+                <input nz-input type="date" type="datetime" formControlName="born" [(ngModel)]="employeeBinding.born" />
+            </ng-template>
+            <ng-template #elseBlock1>
+                <input nz-input type="date" formControlName="born" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+        
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>SĐT</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock8 else elseBlock8"></div>
+            <ng-template #thenBlock8>
+                <input nz-input formControlName="phoneNumber" [(ngModel)]="employeeBinding.phoneNumber" />
+            </ng-template>
+            <ng-template #elseBlock8>
+                <input nz-input formControlName="phoneNumber" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Địa chỉ</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock2 else elseBlock2"></div>
+            <ng-template #thenBlock2>
+                <input nz-input formControlName="adress" [(ngModel)]="employeeBinding.adress" />
+            </ng-template>
+            <ng-template #elseBlock2>
+                <input nz-input formControlName="adress" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Lương</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock3 else elseBlock3"></div>
+            <ng-template #thenBlock3>
+                <input nz-input type="number" formControlName="salary" [(ngModel)]="employeeBinding.salary" />
+            </ng-template>
+            <ng-template #elseBlock3>
+                <input nz-input type="number" formControlName="salary" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Ngày bắt đầu</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock4 else elseBlock4"></div>
+            <ng-template #thenBlock4>
+                <input nz-input type="date" type="datetime" formControlName="fromDate" [(ngModel)]="employeeBinding.fromDate" />
+            </ng-template>
+            <ng-template #elseBlock4>
+                <input nz-input type="date" formControlName="fromDate" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+        
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Trạng thái</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock5 else elseBlock5"></div>
+            <ng-template #thenBlock5>
+                <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="employeeBinding.status"
+                    formControlName="status">
+                    <nz-option nzLabel="Đang làm việc" [nzValue]="1">
+                    </nz-option>
+
+                    <nz-option nzLabel="Đã nghỉ việc" [nzValue]="0">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #elseBlock5>
+                <nz-select style="width: 100%;" nzShowSearch formControlName="status">
+                    <nz-option nzLabel="Đang làm việc" [nzValue]="1">
+                    </nz-option>
+
+                    <nz-option nzLabel="Đã nghỉ việc" [nzValue]="0">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Chức vụ</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="employeeBinding != undefined; then thenBlock6 else elseBlock6"></div>
+            <ng-template #thenBlock6>
+                <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="employeeBinding.positionId"
+                    formControlName="position">
+                    <nz-option *ngFor="let item of positionList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #elseBlock6>
+                <nz-select style="width: 100%;" nzShowSearch formControlName="position">
+                    <nz-option *ngFor="let item of positionList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+
+
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!createOrUpdateForm.valid"
+            (click)="submitForm(createOrUpdateForm.value)">Lưu</button>
+        &nbsp;
+        <button nz-button (click)="closeForm();">Đóng</button>
+    </nz-form-control>
+
+</form>

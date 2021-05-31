@@ -1,0 +1,115 @@
+<br>
+<div nz-row>
+    <h3>Bộ môn</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="6">
+        <nz-card nzTitle="Lịch học">
+            <div nz-col class="gutter-row" [nzSpan]="24">
+                <nz-collapse>
+                    <nz-collapse-panel [nzHeader]="collapse">
+                        
+                            <div nz-col nzSpan="1">
+                                <p>Từ ngày:</p>
+                            </div>
+                            <div nz-col nzSpan="4">
+                                <nz-input-group>
+                                    <input type="text" nz-input type="date" #fromDateFilter/>
+                                </nz-input-group>
+                      
+                            </div>
+                          
+                            <div nz-col nzSpan="1">
+                                <p>Đến ngày:</p>
+                            </div>
+                            <div nz-col nzSpan="4">
+                                <nz-input-group>
+                                    <input type="text" nz-input type="date" #toDateFilter/>
+                                </nz-input-group>
+                            </div>
+                            &nbsp;
+                            <div nz-row>
+                                <div nz-col>
+                                    <div nz-col nzSpan="4">
+                                        <button nz-button nzType="primary" (click)="getAllTimeTable('',fromDateFilter.value,toDateFilter.value )">Áp dụng</button>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div nz-col>
+                                    <div nz-col nzSpan="4">
+                                        <button nz-button nzType="primary" (click)="getAllTimeTable('',undefined,undefined)">Reset</button>
+                                    </div>
+                                </div>
+                            </div>                                                            
+                    </nz-collapse-panel>
+                  </nz-collapse>
+            </div>
+            <nz-table nzTemplateMode #timetableTable [nzData]="timeTableList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Lớp</th>
+                        <th>Giáo viên</th>
+                        <th>ngày</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of timetableTable.data" (click)="getStudentByClassId(item.id)">
+                        <td>{{item.id}}</td>
+                        <td>{{item.className}} <br>
+                            <hr> {{item.lesson}}
+                        </td>
+                        <td>{{item.employeeName}}</td>
+                        <td>{{item.date | date: 'dd-MM-YYYY'}}</td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+    <div nz-col nzSpan="18">
+        <nz-card nzTitle="Danh sách học viên (Sĩ số: {{totalStudent}})">
+
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" #search nz-input placeholder="từ khóa....." />
+            </nz-input-group>
+
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="getAllProduct(search.value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </ng-template>
+
+            <br><br>
+
+            <nz-table nzTemplateMode #table [nzData]="cusInClassList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Học viên</th>
+                        <th>Sđt</th>
+                        <th>Ca</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of table.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.customerName}}</td>
+                        <td>{{data.customerPhoneNumber}}</td>
+                        <td>{{data.sessionName}}</td>
+                        <td *ngIf="data.active == true">Đã check in</td>
+                        <td *ngIf="data.active == false">Chưa check in</td>
+                        <td>
+                            <button nz-button nzType="primary" (click)="deleteStudentFromClass(data.id)">Xóa</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+
+    </div>
+</div>

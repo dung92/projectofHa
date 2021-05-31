@@ -1,0 +1,119 @@
+<br>
+<div nz-row>
+    <h3>Bảng giá dịch vụ</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <div>
+            <nz-card [nzBordered]="false" nzTitle="bảng giá" [nzExtra]="extraTemplate">
+                <div nz-row [nzGutter]="16">
+                    <!-- filter -->
+                    <div nz-col class="gutter-row" [nzSpan]="4">
+                        <div class="inner-box">
+                            Bộ môn:
+                            <nz-select [(ngModel)]="binding1" style="width: 100%;" nzShowSearch (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)" #productSelect>
+                                <nz-option *ngFor="let item of productList" [nzLabel]="item.name" [nzValue]="item.id">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="4">
+                        <div class="inner-box">
+                            Dịch vụ:
+                            <nz-select style="width: 100%;" [(ngModel)]="binding2" nzShowSearch (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)" #serviceSelect>
+                                <nz-option *ngFor="let item of servicetList" [nzLabel]="item.name" [nzValue]="item.id">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="4">
+                        <div class="inner-box">
+                            Gói thời hạn:
+                            <nz-select style="width: 100%;" [(ngModel)]="binding3" nzShowSearch (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)" #optionSelect>
+                                <nz-option *ngFor="let item of optionList" [nzLabel]="item.name" [nzValue]="item.id">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>        
+                    <br><br>
+                </div>
+                <br>
+                <!-- search -->
+                <div nz-row [nzGutter]="16">
+                    <div nz-col class="gutter-row" [nzSpan]="2">
+                        <p style="font-size: 20px;">Tìm kiếm:</p>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="10">
+                        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                            <input type="text" nz-input placeholder="Tên..." #search/>
+                        </nz-input-group>
+                        <ng-template #suffixIconButton>
+                            <button nz-button nzType="primary" nzSearch (click)="getAllProductCategory(search.value)">
+                                <i class="fas fa-search"></i>
+                            </button>                        
+                        </ng-template>
+                        
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="10">
+                        <button nz-button nzType="primary" (click)="getAllProductCategory('')">
+                            <i class="fas fa-undo"></i>&nbsp;
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <nz-table nzTemplateMode #productCategoryTable [nzData]="productCategoryList">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th style="width: 20%;">Bộ môn</th>
+                                <th style="width: 20%;">Dịch vụ</th>
+                                <th style="width: 20%;">Gói thời hạn</th>
+                                <th>Giá</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of productCategoryTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.serviceName}}</td>
+                                <td>{{item.optionName}}</td>
+                                <td>{{item.price | currency:'VND'}}</td>
+                                <td>
+                                    <button nz-button nzType="primary" (click)="showModal(item)">Sửa</button>
+                                    &nbsp;
+                                    <button nz-button nzType="primary" (click)="deleteProductCategory(item.id)">Xóa</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+
+
+        </div>
+        <ng-template #extraTemplate>
+            <button nz-button nzType="primary" (click)="showModal()">
+                <i class="fas fa-plus"></i>&nbsp;
+                Thêm mới
+            </button>
+        </ng-template>
+    </div>
+
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>Thêm/sửa bảng giá</ng-template>
+
+    <ng-template #modalContent>
+        <app-create-or-update-product-category (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [productEdited]="productCategoryEdited"></app-create-or-update-product-category>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>

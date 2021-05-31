@@ -1,0 +1,53 @@
+<form nz-form [formGroup]="createOrUpdateForm">
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Tên</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productBinding != undefined; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <input nz-input formControlName="name" [(ngModel)]="productBinding.name"/>
+            </ng-template>
+            <ng-template #elseBlock>
+                <input nz-input formControlName="name" />
+            </ng-template>
+            <!-- <input nz-input formControlName="userName" placeholder="nhập vào tên....." formControlName="name" /> -->
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+             
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Mô tả</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productBinding != undefined; then thenBlock1 else elseBlock1"></div>
+            <ng-template #thenBlock1>
+                <input nz-input formControlName="description" [(ngModel)]="productBinding.description"/>
+            </ng-template>
+            <ng-template #elseBlock1>
+                <input nz-input formControlName="description" />
+            </ng-template>
+            <!-- <input nz-input formControlName="userName" placeholder="nhập vào mô tả....."
+                formControlName="description" /> -->
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!createOrUpdateForm.valid"
+            (click)="submitForm(createOrUpdateForm.value)">Lưu</button>
+            &nbsp;
+        <button nz-button (click)="closeForm();">Đóng</button>
+    </nz-form-control>
+
+</form>

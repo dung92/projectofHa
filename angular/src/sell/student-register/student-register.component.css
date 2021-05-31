@@ -1,0 +1,57 @@
+.action-student {
+    margin-top: -6px;
+    padding-bottom: 5px;
+}
+
+.action-student .cancel-calendar {
+    margin-left: 4px;
+}
+
+.information-class {
+    display: flex;
+    justify-content: center
+}
+
+.main-information-class {
+    border: 1px solid;
+    padding: 10px;
+}
+
+.work-hour {
+    font-weight: bold;
+}
+
+td {
+    text-align: center;
+    border: 1px solid !important
+}
+
+th {
+    text-align: center !important;
+    border: 1px solid;
+    width: 12%;
+    font-weight: bold !important;
+    background: #F2EFD0!important;
+
+}
+
+th:nth-child(1) {
+    width: 5%
+}
+
+th:nth-child(2) {
+    width: 5%
+}
+
+.information-class {
+    display: flex !important;
+    justify-content: center !important
+}
+
+.group {
+    font-weight: bold;
+}
+
+.table-group {
+    margin-top: 20px
+}

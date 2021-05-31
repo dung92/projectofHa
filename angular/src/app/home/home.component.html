@@ -1,0 +1,211 @@
+﻿﻿<div nz-row>
+
+
+  <div nz-col nzSpan="12">
+    <div nz-row>
+      <div nz-col nzSpan="12" style="padding: 10px;">
+        <mdb-card style="height: 200px;">
+          <mdb-card-body>
+            <mdb-card-title>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnDMZsbKslMr1MQ1cZ4tOAY793NEM5dlcjpXGzIcxM1pY6ey7xEtifrdoWRJU2_MzDDbA&usqp=CAU"
+                class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+              <label style="display: inline;">Doanh thu ngày/Yoga</label>
+            </mdb-card-title>
+            <mdb-card-text>
+              <hr>
+              <div nz-row>
+                <div nz-col nzSpan="8">
+                  <img src="https://images.all-free-download.com/images/graphiclarge/yoga_logo_6825358.jpg"
+                    class="img-thumbnail" style="width: 80px; border: none; box-shadow: none;" alt="...">
+                </div>
+                <div nz-col nzSpan="14">
+                  <br>
+                  <h5>{{yogaRevenueToday | currency:'VND':'VND '}}</h5>
+                </div>
+                <div nz-col nzSpan="2">
+                  <button nz-button nzType="text" size="small" (click)="getYogaRevenue()"><i
+                      class="fas fa-eye"></i></button>
+                </div>
+              </div>
+              <div>
+                <nz-progress [nzPercent]="yogaPercent" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+                  nzStatus="active"></nz-progress>
+              </div>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+      <div nz-col nzSpan="12" style="padding: 10px;">
+        <mdb-card style="height: 200px;">
+          <mdb-card-body>
+            <mdb-card-title>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnDMZsbKslMr1MQ1cZ4tOAY793NEM5dlcjpXGzIcxM1pY6ey7xEtifrdoWRJU2_MzDDbA&usqp=CAU"
+                class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+              <label style="display: inline;">Doanh thu ngày/Dance</label>
+            </mdb-card-title>
+
+            <mdb-card-text>
+              <hr>
+              <div nz-row>
+                <div nz-col nzSpan="8">
+                  <img
+                    src="https://thumbs.dreamstime.com/b/dance-logo-silhouette-active-people-dancing-logo-dance-classes-healthy-generic-activity-simple-icon-websites-info-168550285.jpg"
+                    class="img-thumbnail" style="width: 130px; border: none; box-shadow: none;" alt="...">
+                </div>
+                <div nz-col nzSpan="14">
+                  <br>
+                  <h5>{{danceRevenueToday | currency:'VND':'VND '}}</h5>
+                </div>
+                <div nz-col nzSpan="2">
+                  <button nz-button nzType="text" size="small" (click)="getDanceRevenue()"><i
+                      class="fas fa-eye"></i></button>
+                </div>
+              </div>
+              <div>
+                <nz-progress [nzPercent]="dancePercent" [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+                  nzStatus="active"></nz-progress>
+              </div>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+    </div>
+
+    <div nz-row>
+      <div nz-col nzSpan="24" style="padding: 10px;">
+        <mdb-card style="height: 300px;">
+          <mdb-card-body>
+            <mdb-card-title>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Fv3IgGncxF0DQ4zAnRK-2vRDWeZSW6dOdqMumuHD5JlGLkx0WDc7JYFxvxWr5Qkzqew&usqp=CAU"
+                class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+              <label style="display: inline;">Khách hàng mới</label>
+            </mdb-card-title>
+
+            <mdb-card-text>
+              <hr>
+              <div *ngIf="customerList.length > 0">
+
+                <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+                  <nz-list-item *ngFor="let item of customerListShow">
+                    <nz-list-item-meta nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                      [nzDescription]="item.phoneNumber">
+                      <nz-list-item-meta-title>
+                        <a href="" routerLink="/app/admin/main/customer">{{ item.name }}</a>
+                      </nz-list-item-meta-title>
+                    </nz-list-item-meta>
+                  </nz-list-item>
+                  <nz-list-empty *ngIf="customerListShow.length === 0"></nz-list-empty>
+                </nz-list>             
+              </div>
+              <div *ngIf="customerList.length == 0">
+                Bạn chưa có khách hàng nào
+              </div>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+    </div>
+  </div>
+
+
+  <div nz-col nzSpan="12" style="padding: 10px;">
+    <mdb-card style="height: 535px;">
+      <mdb-card-body>
+        <mdb-card-title>
+          <img
+            src="https://images.vexels.com/media/users/3/146265/isolated/preview/7ca0dcf43bfb86c6e4a83ffca34bc91e-column-chart-graph-by-vexels.png"
+            class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+          <label style="display: inline;">Doanh thu theo tháng</label>
+        </mdb-card-title>
+
+        <mdb-card-text>
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chartType1" [datasets]="chartDatasets1" [labels]="chartLabels1"
+              [colors]="chartColors1" [options]="chartOptions1" [legend]="true" (chartHover)="chartHovered1($event)"
+              (chartClick)="chartClicked1($event)">
+            </canvas>
+          </div>
+        </mdb-card-text>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+
+</div>
+
+<div nz-row>
+  <div nz-col nzSpan="12" style="padding: 10px;">
+    <mdb-card style="height: 530px;">
+      <mdb-card-body>
+        <mdb-card-title>
+          <img src="https://img2.pngio.com/growth-chart-png-file-png-all-growth-chart-logo-png-400_400.png"
+            class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+          <label style="display: inline;">Tăng trưởng doanh thu</label>
+        </mdb-card-title>
+
+        <mdb-card-text>
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+              [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
+        </mdb-card-text>
+      </mdb-card-body>
+    </mdb-card>
+
+  </div>
+
+  <div nz-col nzSpan="12" style="padding: 10px;">
+    <mdb-card style="height: 530px;">
+      <mdb-card-body>
+        <mdb-card-title>
+          <img
+            src="https://images.vexels.com/media/users/3/129856/isolated/preview/83b8b3382c3f8f1ac4a8b16c5388360f-colorful-four-parts-pie-chart-by-vexels.png"
+            class="img-thumbnail" style="width: 30px; border: none; box-shadow: none;" alt="..."> &nbsp;
+          <label style="display: inline;">Truyền thông</label>
+        </mdb-card-title>
+
+        <mdb-card-text>
+          <div nz-row>
+            <div nz-col nzSpan="12">
+              <div style="display: block">
+                <canvas mdbChart [chartType]="chartType2" [datasets]="chartDatasets2" [labels]="chartLabels2"
+                  [colors]="chartColors2" [options]="chartOptions2" [legend]="true" (chartHover)="chartHovered2($event)"
+                  (chartClick)="chartClicked2($event)">
+                </canvas>
+              </div>
+            </div>
+            <div nz-col nzSpan="12">
+              <br><br><br><br>
+              <div>
+                <label for="">Tỷ lệ mua hàng online:</label>
+                <nz-progress [nzPercent]="onlinePercent" nzStrokeColor="#b5cf49" nzStatus="active"></nz-progress>             
+              </div>
+              <div >
+                <label for="">Tỷ lệ khách hàng tiếp cận qua Facebook:</label>
+                <nz-progress [nzPercent]="40" nzStrokeColor="#46BFBD" nzStatus="active"></nz-progress>  
+              </div>
+              <div>
+                <label for="">Tỷ lệ khách hàng tiếp cận qua Google:</label>
+                <nz-progress [nzPercent]="20" nzStrokeColor="#F7464A" nzStatus="active"></nz-progress>  
+              </div>
+              <div>
+                <label for="">Tỷ lệ khách hàng tiếp cận qua Youtube:</label>
+                <nz-progress [nzPercent]="10" nzStrokeColor="#FDB45C" nzStatus="active"></nz-progress>  
+              </div>
+              <div>
+                <label for="">Tỷ lệ khách hàng tiếp cận qua Website:</label>
+                <nz-progress [nzPercent]="30" nzStrokeColor="#949FB1" nzStatus="active"></nz-progress>  
+              </div>
+            </div>
+          </div>
+          
+        </mdb-card-text>
+      </mdb-card-body>
+    </mdb-card>
+
+  </div>
+</div>

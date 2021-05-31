@@ -1,0 +1,66 @@
+<br>
+<div nz-row>
+    <h3>Bộ môn</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <nz-card nzTitle="Danh sách bộ môn" [nzExtra]="extraTemplate">
+
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" #search nz-input placeholder="từ khóa....." />
+            </nz-input-group>
+
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="getAllProduct(search.value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </ng-template>
+
+            <br><br>
+
+            <nz-table nzTemplateMode #table [nzData]="productList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th style="width: 20%;">Tên</th>
+                        <th style="width: 60%;">Mô tả</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of table.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.description}}</td>
+                        <td>
+                            <button nz-button nzType="primary" (click)="showModal(data.id)">Sửa</button>
+                            &nbsp;
+                            <button nz-button nzType="primary" (click)="deleteProduct(data.id)">Xóa</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+        <ng-template #extraTemplate>
+            <button nz-button nzType="primary" (click)="showModal()">
+                <i class="fas fa-plus"></i>&nbsp;
+                Thêm mới
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>Thêm/sửa sản phẩm</ng-template>
+
+    <ng-template #modalContent>
+        <app-create-or-update-product (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [productBinding]="productListFilter"></app-create-or-update-product>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,77 @@
+<div class="intro-section-nav">
+    <!-- intro section -->
+    <div class="">
+        <!-- navigation-transparent -->
+        <div class="header">
+            <!-- navigation -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <a class="logo" href="index.html"><img src="assets/plugin/images/logo.png" alt=""></a>
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                        <div id="navigation" class="navigation">
+                            <ul class="pull-right">
+                                <li class="active">
+                                    <a href="" title="Trang chủ" class="animsition-link" routerLink="/sell/page">
+                                        Trang chủ
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="" title="Lịch học" class="animsition-link" routerLink="/sell/student">
+                                        Lịch học
+                                    </a>
+                                </li>
+
+                                <li><a class="animsition-link">Dịch vụ</a>
+                                    <ul>
+                                        <li>
+                                            <a href="" routerLink="/sell/yoga-introduction"  title="Dịch vụ yoga" class="animsition-link">
+                                                Yoga
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href=""  routerLink="/sell/dance-introduction" title="Dịch vụ dance" class="animsition-link">
+                                                Dance
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li><a title="Blog" class="animsition-link">{{curentUserName}}</a>
+                                    <ul>
+                                        <li class="active" *ngIf="curentUserName != 'Tài khoản'">
+                                            <a href="" title="Lịch học cá nhân" routerLink="/sell/time" class="animsition-link">
+                                                Xem lịch học
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="" title="Đăng kí" class="animsition-link" routerLink="/sell/register">
+                                                Đăng kí
+                                            </a>
+                                        </li>
+                                        <li class="active" *ngIf="curentUserName == 'Tài khoản'">
+                                            <a href="" title="Đăng nhập" class="animsition-link" routerLink="/sell/login">
+                                                Đăng nhập
+                                            </a>
+                                        </li>
+                                        <li class="active" *ngIf="curentUserName != 'Tài khoản'">
+                                            <a href="" routerLink="/sell/page" class="animsition-link" (click)="clearSession()">
+                                                Đăng xuất
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>

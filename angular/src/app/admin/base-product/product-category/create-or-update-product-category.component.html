@@ -1,0 +1,120 @@
+<form nz-form [formGroup]="createOrUpdateProductCategoryForm">
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Bộ môn</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productEdited != undefined; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="productEdited.productId"
+                    formControlName="productId">
+                    <nz-option *ngFor="let item of productList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #elseBlock>
+                <nz-select style="width: 100%;" nzShowSearch formControlName="productId">
+                    <nz-option *ngFor="let item of productList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Dịch vụ</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productEdited != undefined; then thenBlock1 else elseBlock1"></div>
+            <ng-template #thenBlock1>
+                <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="productEdited.serviceId"
+                    formControlName="serviceId">
+                    <nz-option *ngFor="let item of servicetList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #elseBlock1>
+                <nz-select style="width: 100%;" nzShowSearch formControlName="serviceId">
+                    <nz-option *ngFor="let item of servicetList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Gói thời hạn</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productEdited != undefined; then thenBlock2 else elseBlock2"></div>
+            <ng-template #thenBlock2>
+                <nz-select style="width: 100%;" nzShowSearch [(ngModel)]="productEdited.optionId"
+                    formControlName="optionId">
+                    <nz-option *ngFor="let item of optionList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #elseBlock2>
+                <nz-select style="width: 100%;" nzShowSearch formControlName="optionId">
+                    <nz-option *ngFor="let item of optionList" [nzLabel]="item.name" [nzValue]="item.id">
+                    </nz-option>
+                </nz-select>
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Giá</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="productEdited != undefined; then thenBlock3 else elseBlock3"></div>
+            <ng-template #thenBlock3>
+                <input nz-input formControlName="userName" placeholder="nhập vào giá....." formControlName="price"
+                    [(ngModel)]="productEdited.price" />
+            </ng-template>
+
+            <ng-template #elseBlock3>
+                <input nz-input formControlName="userName" placeholder="nhập vào giá....." formControlName="price" />
+            </ng-template>
+
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị này bắt buộc
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+
+
+
+
+    <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+            <button nz-button nzType="primary" [disabled]="!createOrUpdateProductCategoryForm.valid"
+                (click)="submitForm(createOrUpdateProductCategoryForm.value)">Lưu</button>
+            <button nz-button (click)="closeForm()">Đóng</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>

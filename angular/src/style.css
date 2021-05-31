@@ -1,0 +1,9 @@
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import "~ng-zorro-antd/style/index.min.css"; /* Import base styles */
+@import "~ng-zorro-antd/button/style/index.min.css";  /* Import one component's styles */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+*
+{
+    font-family: 'Noto Sans';
+}

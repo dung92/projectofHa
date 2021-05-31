@@ -1,0 +1,79 @@
+<div style="padding:30px;">
+    <div nz-row>
+        <div nz-col nzSpan="8">
+        </div>
+        <div nz-col nzSpan="8">
+            <nz-card [nzBordered]="true" style="width:100%; text-align: center;" nzTitle="Đăng kí tài khoản">
+                <form nz-form [formGroup]="createOrUpdateForm">
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Tên</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                            <input nz-input formControlName="name" />
+        
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>SĐT</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback>
+                            <input nz-input formControlName="phoneNumber" />
+        
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Địa chỉ</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                            <input nz-input formControlName="adress" />
+        
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Ngày sinh</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                            <input nz-input formControlName="born" type="date" />
+        
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Tài khoản</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
+                            <input nz-input formControlName="userName" />
+        
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Mật khẩu</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your password!">
+                            <input nz-input type="password" formControlName="password" />
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="7" nzRequired>Email</nz-form-label>
+                        <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
+                            <input nz-input type="email" formControlName="email" />
+                        </nz-form-control>
+                    </nz-form-item>
+        
+                    <nz-form-item>
+                        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                            <button nz-button nzType="primary" [disabled]="!createOrUpdateForm.valid"
+                                (click)="submitForm(createOrUpdateForm.value)">Submit</button>
+                            <button nz-button (click)="resetForm($event)">Reset</button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </nz-card>
+        </div>
+        <div nz-col nzSpan="8">
+        </div>
+    </div>
+    
+</div>
+
+
+<app-footer></app-footer>

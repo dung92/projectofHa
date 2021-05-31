@@ -1,0 +1,37 @@
+.flex-yoga-intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.flex-yoga-intro .image-yoga-intro {
+    padding: 20px
+}
+
+.flex-yoga-intro .content-yoga {
+    word-spacing: 4px;
+    width: 20%
+}
+
+
+::ng-deep .carousel-control-next {
+    left: 755px !important;
+    top: 11px !important;
+}
+
+::ng-deep .carousel-control-prev {
+    left: 375px;
+}
+
+
+.title-yoga {
+    text-align: center;
+    font-size: 40px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+::ng-deep .carousel-inner {
+    position: initial !important;
+}

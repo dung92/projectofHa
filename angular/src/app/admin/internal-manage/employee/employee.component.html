@@ -1,0 +1,76 @@
+<br>
+<div nz-row>
+    <h3>Nhân viên</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <nz-card nzTitle="Danh sách nhân viên" [nzExtra]="extraTemplate">
+
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" #search nz-input placeholder="từ khóa....." />
+            </nz-input-group>
+
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="getAllEmployee(search.value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </ng-template>
+
+            <br><br>
+
+            <nz-table nzTemplateMode #table [nzData]="employeeList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Ngày sinh</th>
+                        <th>SĐT</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày làm việc</th>
+                        <th>Vị trí</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of table.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.born | date:'dd-MM-YYYY'}}</td>
+                        <td>{{data.phoneNumber}}</td>
+                        <td>{{data.adress}}</td>
+                        <td>{{data.fromDate | date:'dd-MM-YYYY'}}</td>
+                        <td>{{data.positionId | positionPipe: positionList}}</td>
+                        <td>{{data.status | workStatusPipe  }}</td>
+                        <td>
+                            <button *ngIf="data.id != 1" nz-button nzType="primary" (click)="showModal(data.id)">Sửa</button>
+                            &nbsp;
+                            <button *ngIf="data.id != 1" nz-button nzType="primary" (click)="deleteEmployee(data.id)">Xóa</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+        <ng-template #extraTemplate>
+            <button nz-button nzType="primary" (click)="showModal()">
+                <i class="fas fa-plus"></i>&nbsp;
+                Thêm mới
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>Thêm/sửa nhân viên</ng-template>
+
+    <ng-template #modalContent>
+        <app-create-or-update-employee (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [employeeBinding]="employeeListFilter"></app-create-or-update-employee>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>

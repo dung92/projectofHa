@@ -1,0 +1,143 @@
+<form nz-form [formGroup]="createOrUpdateForm">
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Tên:</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <input nz-input formControlName="name"  [(ngModel)]="billBinding.name"/>
+            </ng-template>
+            <ng-template #elseBlock>
+                <input nz-input formControlName="name"  />
+            </ng-template>
+           
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+    
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Khách hàng:</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <input nz-input formControlName="name"  [(ngModel)]="billBinding.customerName"/>
+            </ng-template>
+            <ng-template #elseBlock>
+                <input nz-input formControlName="name" />
+            </ng-template>
+           
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+             
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Người tạo</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock2 else elseBlock2"></div>
+            <ng-template #thenBlock2>
+                <input nz-input formControlName="adress" readonly   [(ngModel)]="billBinding.userCreated"/>
+            </ng-template>
+            <ng-template #elseBlock2>
+                <input nz-input formControlName="adress" readonly />
+            </ng-template>
+          
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Tổng tiền</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock3 else elseBlock3"></div>
+            <ng-template #thenBlock3>
+                <input nz-input formControlName="born" type="date"  [(ngModel)]="billBinding.originalPrice" />           
+            </ng-template>
+            <ng-template #elseBlock3>
+                <input nz-input formControlName="born" type="date" />   
+            </ng-template>
+           
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Giảm giá</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock4 else elseBlock4"></div>
+            <ng-template #thenBlock4>
+                <input nz-input formControlName="userName"  [(ngModel)]="billBinding.discount"/>
+            </ng-template>
+            <ng-template #elseBlock4>
+                <input nz-input formControlName="userName"   />
+            </ng-template>
+          
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+                <ng-container *ngIf="control.hasError('duplicated')">
+                    giá trị này đã tồn tại
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Thành tiền</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock5 else elseBlock5"></div>
+            <ng-template #thenBlock5>
+                <input nz-input formControlName="password" type="password"  [(ngModel)]="billBinding.totalPrice"/>
+            </ng-template>
+            <ng-template #elseBlock5>
+                <input nz-input formControlName="password" type="password"  />
+            </ng-template>
+            <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    giá trị bắt buộc
+                </ng-container>
+                <ng-container *ngIf="control.hasError('duplicated')">
+                    giá trị này đã tồn tại
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Ghi chú</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <div *ngIf="billBinding != undefined; then thenBlock6 else elseBlock6"></div>
+            <ng-template #thenBlock6>
+                <input nz-input formControlName="email" type="email" [(ngModel)]="billBinding.note"/>
+            </ng-template>
+            <ng-template #elseBlock6>
+                <input nz-input formControlName="email" type="email"  />
+            </ng-template>
+           
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+        <button nz-button nzType="primary" [disabled]="!createOrUpdateForm.valid"
+            (click)="submitForm(createOrUpdateForm.value)">Lưu</button>
+            &nbsp;
+        <button nz-button (click)="closeForm();">Đóng</button>
+    </nz-form-control>
+
+</form>

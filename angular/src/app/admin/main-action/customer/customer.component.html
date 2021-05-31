@@ -1,0 +1,81 @@
+<br>
+<div nz-row>
+    <h3>Khách hàng</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <nz-card nzTitle="Danh sách khách hàng" [nzExtra]="extraTemplate">
+
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" #search nz-input placeholder="từ khóa....." />
+            </nz-input-group>
+
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="getAllCustomer(search.value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </ng-template>
+
+            <br><br>
+
+            <nz-table nzTemplateMode #table [nzData]="customerList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>SĐT</th>
+                        <th>Địa chỉ</th>
+                        <th>Ngày sinh</th>
+                        <th>Tài khoản</th>
+                        <th>Mật khẩu</th>
+                        <th>Email</th> 
+                        <th>Thao tác</th>                   
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of table.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.phoneNumber}}</td>
+                        <td>{{data.adress}}</td>
+                        <td>{{data.born | date:'dd-MM-YYYY'}}</td>
+                        <td>{{data.userName}}</td>
+                        <td>{{data.password}}</td>
+                        <td>{{data.email}}</td>
+                        <td>
+                            <button nz-button nzType="primary" (click)="showModal(data.id)">Sửa</button>
+                            &nbsp;
+                            <button nz-button nzType="primary" (click)="deleteCustomer(data.id)">Xóa</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+        <ng-template #extraTemplate>
+            <button nz-button nzType="primary" (click)="showModal()">
+                <i class="fas fa-plus"></i>&nbsp;
+                Thêm mới
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>Thêm/sửa khách hàng</ng-template>
+
+    <ng-template #modalContent>
+        
+        <app-create-or-update-customer (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [customerBinding]="customerListFilter"></app-create-or-update-customer>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>
+
+
+
+   

@@ -1,0 +1,28 @@
+<div style="background: #ECECEC;padding:30px;">
+    <nz-card [nzBordered]="false" nzTitle="Lịch học của bạn" >
+        <nz-table nzTemplateMode #table [nzData]="cusInClassList">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Lớp</th>
+                    <th>Bài học</th>
+                    <th>Giáo viên</th>
+                    <th>Ngày</th>
+                    <th>Ca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of table.data">
+                    <td>{{data.id}}</td>
+                    <td>{{data.className}}</td>
+                    <td>{{data.lesson}}</td>
+                    <td>{{data.employeeName}}</td>
+                    <td>{{data.date | date:'dd-MM-YYYY'}}</td>
+                    <td>{{data.sessionName}}</td>
+                </tr>
+
+            </tbody>
+        </nz-table>
+    </nz-card>
+  </div>
+<app-footer></app-footer>

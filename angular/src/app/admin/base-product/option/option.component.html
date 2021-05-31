@@ -1,0 +1,72 @@
+<div>
+    <br>
+    <div nz-row>
+        <h3>Gói tập</h3>
+    </div>
+    <div nz-row>
+        <div nz-col nzSpan="24">
+            <nz-card nzTitle="Danh sách gói thời hạn" [nzExtra]="extraTemplate" >
+    
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input type="text" #search nz-input placeholder="từ khóa....." />
+                </nz-input-group>
+    
+                <ng-template #suffixIconButton>
+                    <button nz-button nzType="primary" nzSearch (click)="getAllOption(search.value)">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </ng-template>
+    
+                <br><br>
+    
+                <nz-table nzTemplateMode #table [nzData]="optionList">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Chỉ số</th>
+                            <th>Đơn vị</th>
+                            <th>Tên</th>
+                            <th>Mô tả</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of table.data">
+                            <td>{{data.id}}</td>
+                            <td>{{data.amount}}</td>
+                            <td>{{data.unit}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.description}}</td>
+                            <td>
+                                <button nz-button nzType="primary" (click)="showModal(data.id)">Sửa</button>
+                                &nbsp;
+                                <button nz-button nzType="primary" (click)="deleteOption(data.id)">Xóa</button>
+                            </td>
+                        </tr>
+    
+                    </tbody>
+                </nz-table>
+    
+            </nz-card>
+            <ng-template #extraTemplate>
+                <button nz-button nzType="primary" (click)="showModal()">
+                    <i class="fas fa-plus"></i>&nbsp;
+                    Thêm mới
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+        (nzOnCancel)="handleCancel()">
+        <ng-template #modalTitle>Thêm/sửa gói tập</ng-template>
+    
+        <ng-template #modalContent>
+            <app-create-or-update-option (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [optionBinding]="optionListFilter"></app-create-or-update-option>
+        </ng-template>
+    
+        <ng-template #modalFooter>
+            
+        </ng-template>
+    </nz-modal>
+</div>

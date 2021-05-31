@@ -1,0 +1,202 @@
+<div nz-row >
+    <div nz-col nzSpan="16">
+        <div style="padding:30px;">
+            <nz-card [nzBordered]="true" nzTitle="Lựa chọn đăng kí tập">
+                <div nz-row>
+                    <div nz-col [nzSpan]="12">
+                        <form nz-form [formGroup]="validateForm">
+                            <nz-form-item>
+                                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                                    [nzErrorTip]="userErrorTpl">
+                                    <b>Bộ môn:</b>
+                                    <nz-select [(ngModel)]="binding1" style="width: 100%;" nzShowSearch
+                                        formControlName="product"
+                                        (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)"
+                                        (ngModelChange)="getProductDescriptionById(productSelect.value)" #productSelect>
+                                        <nz-option *ngFor="let item of productList" [nzLabel]="item.name"
+                                            [nzValue]="item.id">
+                                        </nz-option>
+                                    </nz-select>
+                                    <ng-template #userErrorTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">
+                                            giá trị bắt buộc
+                                        </ng-container>
+
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                            <nz-form-item>
+
+                                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                                    [nzErrorTip]="userErrorTpl">
+                                    <b>Dịch vụ:</b>
+                                    <nz-select style="width: 100%;" [(ngModel)]="binding2" nzShowSearch
+                                        formControlName="service"
+                                        (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)"
+                                        (ngModelChange)="getServiceDescriptionById(serviceSelect.value)" #serviceSelect>
+                                        <nz-option *ngFor="let item of servicetList" [nzLabel]="item.name"
+                                            [nzValue]="item.id">
+                                        </nz-option>
+                                    </nz-select>
+                                    <ng-template #userErrorTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">
+                                            giá trị bắt buộc
+                                        </ng-container>
+
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                            <nz-form-item>
+                                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                                    [nzErrorTip]="userErrorTpl">
+                                    <b>Gói thời hạn:</b>
+                                    <nz-select style="width: 100%;" [(ngModel)]="binding3" nzShowSearch
+                                        formControlName="option"
+                                        (ngModelChange)="getById(productSelect.value, serviceSelect.value, optionSelect.value)"
+                                        (ngModelChange)="getOptionDescriptionById(optionSelect.value)" #optionSelect>
+                                        <nz-option *ngFor="let item of optionList" [nzLabel]="item.name"
+                                            [nzValue]="item.id">
+                                        </nz-option>
+                                    </nz-select>
+                                    <ng-template #userErrorTpl let-control>
+                                        <ng-container *ngIf="control.hasError('required')">
+                                            giá trị bắt buộc
+                                        </ng-container>
+
+                                    </ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+
+
+
+                        </form>
+                        <div nz-col [nzSpan]="12">
+                            <b>Từ ngày:</b>
+                            <input nz-input type="date" [(ngModel)]="fromDateToCreate" (ngModelChange)="onDateChange()">
+                        </div>
+                        &nbsp;
+                        <div nz-col [nzSpan]="12">
+                            <b>Đến ngày:</b>
+                            <input nz-input type="date" [(ngModel)]="toDateToCreate" readonly>
+                        </div>
+                        &nbsp;
+                    </div>
+
+                    <div nz-col [nzSpan]="12">
+                        <div style="padding:30px;">
+                            <nz-card [nzBordered]="false" nzTitle="Thông tin dịch vụ">
+                                <ul>
+                                    <li>
+                                        <p style="font-size: 17px;">
+                                            {{showProductDescription}}
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 17px;">
+                                            {{showServiceDescription}}
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p style="font-size: 17px;">
+                                            {{showOptionDescription}}
+                                        </p>
+                                    </li>
+                                </ul>
+                            </nz-card>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div nz-row>
+                    <b>Bảng giá</b>
+                    <nz-table nzTemplateMode #productCategoryTable [nzData]="productCategoryList"
+                        [nzScroll]="{ y: '240px' }">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th style="width: 20%;">Bộ môn</th>
+                                <th style="width: 20%;">Dịch vụ</th>
+                                <th style="width: 20%;">Gói thời hạn</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of productCategoryTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.serviceName}}</td>
+                                <td>{{item.optionName}}</td>
+                                <td>{{item.price | currency:'VND'}}</td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div style="padding:30px;">
+            <nz-card [nzBordered]="true" nzTitle="Thông tin hóa đơn">
+                <div>
+                    <label for="">Tên khách hàng:</label>&nbsp;
+                    {{customer}}
+                    <br>
+                    <br>
+                    <label for="">Bộ môn:</label>&nbsp;
+                    {{showProductName}}
+                    <br>
+                    <br>
+                    <label for="">Dịch vụ:</label>&nbsp;
+                    {{showServiceName}}
+                    <br><br>
+                    <label for="">Gói thời hạn:</label>&nbsp;
+                    {{showOptionName}}
+                    <br>
+                    <br>
+                    <form nz-form [formGroup]="createForm">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="0" nzRequired>Tổng tiền</nz-form-label>
+                            <nz-form-control [nzSpan]="24" nzHasFeedback nzValidatingTip="Validating...">
+                                <div *ngIf="productCategory != undefined; then thenBlock else elseBlock"></div>
+                                <ng-template #thenBlock>
+                                    <input style="border: none; " readonly nz-input formControlName="originalPrice"
+                                        [(ngModel)]="productCategory.price" />
+                                </ng-template>
+                                <ng-template #elseBlock>
+                                    <input style="border: none; " readonly nz-input formControlName="originalPrice" />
+                                </ng-template>
+
+                            </nz-form-control>
+                        </nz-form-item>
+                        <br><br><br><br><br>
+
+                        <nz-form-control [nzSpan]="24">
+                            <div nz-row>
+                                <div nz-col nzSpan="12">
+                                    <button nz-button nzType="primary" style="height: 150%; width: 95%;"
+                                        [disabled]="!createForm.valid || !validateForm.valid"
+                                        (click)="submitForm(createForm.value)">
+                                        Thanh toán
+                                    </button>
+                                </div>
+
+                                <div nz-col nzSpan="12">
+                                    <button nz-button style="height: 150%; width: 95%;"
+                                        (click)="resetForm($event)">Reset</button>
+                                </div>
+                            </div>
+                        </nz-form-control>
+
+                    </form>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

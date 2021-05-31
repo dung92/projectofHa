@@ -1,0 +1,70 @@
+<br>
+<div nz-row>
+    <h3>Chức vụ</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <nz-card nzTitle="Danh sách chức vụ" [nzExtra]="extraTemplate">
+
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" #search nz-input placeholder="từ khóa....." />
+            </nz-input-group>
+
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="getAllPosition(search.value)">
+                    <i class="fas fa-search"></i>
+                </button>
+            </ng-template>
+
+            <br><br>
+
+            <nz-table nzTemplateMode #table [nzData]="positionList">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên</th>
+                        <th>Mô tả</th>
+                        <th>Lương cơ bản</th>
+                        <th>Phụ cấp</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of table.data">
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.description}}</td>
+                        <td>{{data.baseSalary}}</td>
+                        <td>{{data.bonus}}</td>
+                        <td>
+                            <button nz-button nzType="primary" (click)="showModal(data.id)">Sửa</button>
+                            &nbsp;
+                            <button *ngIf="data.id != 1" nz-button nzType="primary" (click)="deletePosition(data.id)">Xóa</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </nz-table>
+
+        </nz-card>
+        <ng-template #extraTemplate>
+            <button nz-button nzType="primary" (click)="showModal()">
+                <i class="fas fa-plus"></i>&nbsp;
+                Thêm mới
+            </button>
+        </ng-template>
+    </div>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>Thêm/sửa chức vụ</ng-template>
+
+    <ng-template #modalContent>
+        <app-create-or-update-position (closeEvent)="handleCancel()" (saveEvent)="handleOk()" [positionBinding]="positionListFilter"></app-create-or-update-position>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>

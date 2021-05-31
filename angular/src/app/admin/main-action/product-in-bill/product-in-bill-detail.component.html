@@ -1,0 +1,61 @@
+<div nz-row>
+    <div nz-col nzSpan="24" style="height: 300px;">
+        <div style="background: #ECECEC;padding:30px;"  style="height: 100%;">
+            <nz-card [nzBordered]="false" nzTitle="Chi tiết hóa đơn" >
+                <div nz-row>
+                    <div nz-col nzSpan="12">
+                        <div>
+                            <label for="">Mã hóa đơn:</label>
+                            {{productInBillBinding.billName}}
+                            <br>
+                            <label for="">Thu ngân:</label>
+                            {{productInBillBinding.userCreated}}
+                            <br>
+                            <label for="">Ngày tạo</label>     
+                            {{productInBillBinding.dateCreated | date:'dd-MM-YYYY'}}
+                            <br>
+                            <label for="">Tổng tiền:</label>
+                            {{productInBillBinding.originalPrice | currency:'VND'}}
+                            <br>
+                            <label for="">Giảm giá:</label>
+                            {{productInBillBinding.discount}}
+                            <br>
+                            <label for="">Thành tiền:</label>   
+                            {{productInBillBinding.totalPrice | currency:'VND'}}
+                            <br> 
+                            <label for="">Ghi chú:</label>      
+                            {{productInBillBinding.note}}
+                            <br>              
+                        </div>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <div>
+                            <label for="">Tên khách hàng:</label>
+                            {{productInBillBinding.customerName}}
+                            <br>
+                            <label for="">SĐT khách hàng:</label>
+                            {{productInBillBinding.customerPhoneNumber}}
+                            <br>
+                            <label for="">Bộ môn:</label>
+                            {{productInBillBinding.productName}}
+                            <br>
+                            <label for="">Dịch vụ:</label>
+                            {{productInBillBinding.serviceName}}
+                            <br>
+                            <label for="">Gói thời hạn:</label>
+                            {{productInBillBinding.optionName}}
+                            <br>
+                            <label for="">Từ ngày:</label>
+                            {{productInBillBinding.fromDate | date:'dd-MM-YYYY'}}
+                            <br>
+                            <label for="">Đến ngày:</label>
+                            {{productInBillBinding.toDate | date:'dd-MM-YYYY'}}
+                            <br>
+                        </div>
+                    </div>
+                  </div>
+            </nz-card>
+        </div>
+     
+    </div>
+</div>

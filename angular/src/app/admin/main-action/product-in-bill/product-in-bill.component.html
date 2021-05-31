@@ -1,0 +1,87 @@
+<br>
+<div nz-row>
+    <h3>Quản lý hóa đơn</h3>
+</div>
+<div nz-row>
+    <div nz-col nzSpan="24">
+        <div>
+            <nz-card [nzBordered]="false" nzTitle="bảng giá" [nzExtra]="extraTemplate">
+                <div nz-row [nzGutter]="16">
+                   
+                </div>
+                <br>
+                <!-- search -->
+                <div nz-row [nzGutter]="16">
+                    <div nz-col class="gutter-row" [nzSpan]="2">
+                        <p style="font-size: 20px;">Tìm kiếm:</p>
+                    </div>
+                    <div nz-col class="gutter-row" [nzSpan]="10">
+                        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                            <input type="text" nz-input placeholder="Tên..." #search/>
+                        </nz-input-group>
+                        <ng-template #suffixIconButton>
+                            <button nz-button nzType="primary" nzSearch (click)="getAllProductInBill(search.value)">
+                                <i class="fas fa-search"></i>
+                            </button>                        
+                        </ng-template>
+                        
+                    </div>
+                   
+                </div>
+                <div>
+                    <nz-table nzTemplateMode #billManageTable [nzData]="productInBillList">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mã hóa đơn</th>
+                                <th>Ngày tạo</th>
+                                <th>Thu ngân</th>
+                                <th>Tên khách hàng</th>
+                                <th>Bộ môn</th>
+                                <th>Dịch vụ</th>
+                                <th>Gói thời hạn</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of billManageTable.data">
+                                <td>{{item.id}}</td>
+                                <td>{{item.billName}}</td>
+                                <td>{{item.dateCreated | date:'dd-MM-YYYY'}}</td>
+                                <td>{{item.userCreated}}</td>
+                                <td>{{item.customerName}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.serviceName}}</td>
+                                <td>{{item.optionName}}</td>
+                                <td>
+                                    <button nz-button nzType="primary" (click)="showModal(item)">Chi tiết</button>
+                                    &nbsp;
+                                    <button nz-button nzType="primary" (click)="deleteProductCategory(item.id, item.billId)">Xóa</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+
+
+        </div>
+        <ng-template #extraTemplate>          
+        </ng-template>
+    </div>
+
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" [nzContent]="modalContent" [nzFooter]="modalFooter" [nzWidth]= "800" 
+    (nzOnCancel)="handleCancel()">
+
+    <ng-template #modalContent>
+        <app-product-in-bill-detail [productInBillBinding]="productInBillBinding"></app-product-in-bill-detail>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        
+    </ng-template>
+</nz-modal>
